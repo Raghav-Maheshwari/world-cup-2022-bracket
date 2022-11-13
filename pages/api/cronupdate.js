@@ -1,7 +1,6 @@
 import { updateCronJobCount } from "../../lib/utils/update-cronjob-count";
-import { verifySignature } from '@upstash/qstash/nextjs';
 
-const cronJobHandler = async (req, res) => {
+export default async (req, res) => {
   try {
     const cronJobCount = await updateCronJobCount();
 
@@ -10,15 +9,3 @@ const cronJobHandler = async (req, res) => {
     res.json({ error: e.message });
   }
 }
-
-export default verifySignature(cronJobHandler);
-
-/**
- * To verify the authenticity of the incoming request in the `verifySignature`
- * function, we need access to the raw request body.
- */
- export const config = {
-  api: {
-    bodyParser: false,
-  },
-};

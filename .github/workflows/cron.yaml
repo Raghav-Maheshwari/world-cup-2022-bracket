@@ -1,0 +1,13 @@
+name: matchday-cron
+on:
+  schedule:
+    - cron: */5 * * * *
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call api/matchday route every 5 minutes
+      run: |
+          curl --request POST \
+          --url 'https://raghav-world-cup-2022-bracket.vercel.app/api/cronupdate' 
+          
