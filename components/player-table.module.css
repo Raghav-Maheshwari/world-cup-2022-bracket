@@ -1,0 +1,8 @@
+.tableContainer {
+  width: 95%;
+}
+
+.playerRow {
+  display: flex;
+  justify-content: space-between;
+}

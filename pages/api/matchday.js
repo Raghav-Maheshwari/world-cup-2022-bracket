@@ -1,4 +1,4 @@
-import clientPromise from "../../lib/mongodb";
+import { setupDb } from "../../lib/setup-db";
 
 const STAGE_TO_POINTS = {
   "First stage": 3,
@@ -15,8 +15,7 @@ const STAGE_TO_POINTS = {
  */
 export default async (req, res) => {
   try {
-    const client = await clientPromise;
-    const db = client.db("world-cup-2022-bracket-db");
+    const db = await setupDb();
     // const worldcupApiResponse = await fetch('https://world-cup-json-2022.fly.dev/matches/today');
     // const matchesToday = await worldcupApiResponse.json();
 
