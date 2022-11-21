@@ -40,7 +40,17 @@ export const PlayerTable = ({ players }) => {
     );
   }
   
-  const playerList = players.map(player => {
+  const playerList = players.sort((playerA, playerB) => {
+    const playerAScore = playerA.picks.reduce((acc, country) => {
+      return acc + country.score;
+    }, 0);
+
+    const playerBScore = playerB.picks.reduce((acc, country) => {
+      return acc + country.score;
+    }, 0);
+
+    return playerBScore - playerAScore;
+  }).map(player => {
     const aggregateScore = player.picks.reduce((acc, country) => {
       return acc + country.score;
     }, 0);
@@ -62,6 +72,7 @@ export const PlayerTable = ({ players }) => {
     );
   })
 
+  
 
   return (
     <div className={styles.tableContainer}>
