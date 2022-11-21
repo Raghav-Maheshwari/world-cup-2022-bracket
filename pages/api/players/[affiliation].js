@@ -25,8 +25,10 @@ export default async (req, res) => {
       ]
     ).toArray();
 
-    res.status(200).json(players)
+    const lastUpdatedAt = await db.collection('last-updated')
+      .findOne();
 
+    res.status(200).json({ players, lastUpdatedAt });
   } catch (e) {
     res.json({ e: e.message });
   }  

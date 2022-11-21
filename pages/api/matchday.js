@@ -20,10 +20,28 @@ export default async (req, res) => {
     const matches = await worldcupApiResponse.json();
 
     await handleMatches(matches, db);
+    await updateTimestamp(db);
 
     res.status(200).json({ success: true });
   } catch (e) {
     res.status(500).json({ error: e.message })
+  }
+}
+
+const updateTimestamp = async (db) => {
+  try {
+    const currentTime = Date.now();
+
+    await db.collection('last-updated')
+      .updateOne({
+        title: 'last-updated-at',
+      }, {
+        $set: { timestamp: currentTime }
+      });
+
+    return currentTime;
+  } catch (e) {
+    throw e;
   }
 }
 

@@ -6,6 +6,7 @@ import { Container } from "../components/container";
 export default function Standings() {
   const [players, setPlayers] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [lastUpdatedAt, setLastupdatedAt] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,10 +15,11 @@ export default function Standings() {
         fetch('api/countries'),
       ])
       
-      const players = await playerResponse.json();
+      const { players, lastUpdatedAt } = await playerResponse.json();
       const countries = await countriesResponse.json();
       setPlayers(players);
       setCountries(countries);
+      setLastupdatedAt(new Date(lastUpdatedAt.timestamp).toString());
     }
 
     fetchData(); 
@@ -25,7 +27,7 @@ export default function Standings() {
   
   return (
     <div>
-      <Container>
+      <Container lastUpdatedAt={lastUpdatedAt}>
         <PlayerTable players={players} />
         <CountryTable countries={countries} />
       </Container>
