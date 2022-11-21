@@ -1,0 +1,16 @@
+.title {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: grid; 
+}
+
+@media (min-width: 800px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+}

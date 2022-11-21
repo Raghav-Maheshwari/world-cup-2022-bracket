@@ -1,5 +1,5 @@
 .tableContainer {
-  width: 95%;
+  margin-top: 16px;
 }
 
 .playerRow {
@@ -30,4 +30,5 @@
 
 .countryRow {
   display: flex;
+  flex-wrap: wrap;
 }

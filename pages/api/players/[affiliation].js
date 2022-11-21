@@ -25,7 +25,7 @@ export default async (req, res) => {
       ]
     ).toArray();
 
-    res.status(200).json({ players })
+    res.status(200).json(players)
 
   } catch (e) {
     res.json({ e: e.message });

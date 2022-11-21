@@ -1,0 +1,9 @@
+.tableContainer {
+  margin-top: 16px;
+}
+
+.countryFlag {
+  width: 25px;
+  height: 14px;
+  margin-left: 5px;
+}

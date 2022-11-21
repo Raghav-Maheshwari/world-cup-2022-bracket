@@ -3,14 +3,14 @@ import { PlayerTable } from "../components/player-table";
 import { CountryTable } from "../components/country-table";
 import { Container } from "../components/container";
 
-export default function Rst() {
+export default function Standings() {
   const [players, setPlayers] = useState([]);
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const [playerResponse, countriesResponse] = await Promise.all([
-        fetch('api/players/RST'),
+        fetch('api/players/friends'),
         fetch('api/countries'),
       ])
       
