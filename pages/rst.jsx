@@ -1,47 +1,20 @@
-import { setupDb } from "../lib/setup-db";
 import { PlayerTable } from "../components/player-table";
+import { useEffect, useState } from "react";
 
-export default function Rst({players}){
+export default function Rst() {
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    fetch('api/players/RST')
+      .then(data => data.json())
+      .then(data => {
+        setPlayers(data.players);
+      })
+  }, [])
+  
   return (
-    <PlayerTable players={players} />
+    <div>
+      <PlayerTable players={players} />
+    </div>
   );
-}
-
-export async function getServerSideProps(){
-  try {
-    const db = await setupDb();
-
-    const rstPlayers = await db.collection('players').aggregate(
-      [
-        {
-          $lookup: {
-            from: "countries",
-            localField: "picks",
-            foreignField: "name",
-            as: "picks"
-          }
-        },
-        {
-          $match: {
-            affiliation: {
-              $eq: "RST"
-            }
-          }
-        }
-      ]
-    ).toArray();
-
-    return {
-      props: {
-        players: JSON.parse(JSON.stringify(rstPlayers)),
-      }
-    }
-
-  } catch (e) {
-    return {
-      props: {
-        error: e.message,
-      }
-    }
-  }
 }

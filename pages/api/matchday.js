@@ -11,54 +11,15 @@ const STAGE_TO_POINTS = {
 
 /**
  * api/matchday endpoint that a CRON job will hit every 5 minutes
- * to get the matches of the current day and compute scores for winning countries
+ * to get the matches of world cup and compute scores for winning countries
  */
 export default async (req, res) => {
   try {
     const db = await setupDb();
-    // const worldcupApiResponse = await fetch('https://world-cup-json-2022.fly.dev/matches/today');
-    // const matchesToday = await worldcupApiResponse.json();
-
-    const matches = [
-      {
-        "id": 2,
-        "venue": "Al Bayt Stadium",
-        "location": "Al Khor",
-        "status": "future_scheduled",
-        "weather": {
-          "humidity": null,
-          "temp_celsius": null,
-          "temp_farenheit": null,
-          "wind_speed": null,
-          "description": null
-        },
-        "attendance": null,
-        "officials": [],
-        "stage_name": "First stage",
-        "home_team_country": "QAT",
-        "away_team_country": "ECU",
-        "datetime": "2022-11-20T16:00:00Z",
-        "winner": 'ECU',
-        "winner_code": '4943',
-        "home_team": {
-          "country": "QAT",
-          "name": "Qatar",
-          "goals": null,
-          "penalties": null
-        },
-        "away_team": {
-          "country": "ECU",
-          "name": "Ecuador",
-          "goals": null,
-          "penalties": null
-        },
-        "last_checked_at": "2022-10-27T17:53:29Z",
-        "last_changed_at": "2022-10-27T17:53:29Z"
-      }
-    ]
+    const worldcupApiResponse = await fetch('https://world-cup-json-2022.fly.dev/matches');
+    const matches = await worldcupApiResponse.json();
 
     await handleMatches(matches, db);
-
 
     res.status(200).json({ success: true });
   } catch (e) {
@@ -147,7 +108,7 @@ const scoreCompletedMatch = async (match, db) => {
 
     winnerTeam = match.winner;
     
-    if (match.winner === homeTeam.country_code) {
+    if (match.winner_code === homeTeam.country_code) {
       winnerTeam = homeTeam;
       loserTeam = awayTeam;
     } else {

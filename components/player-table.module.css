@@ -6,3 +6,28 @@
   display: flex;
   justify-content: space-between;
 }
+
+.countryContainer {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 4px 4px;
+  border-radius: 16px;
+}
+
+.countryName {
+  margin-right: 10px;
+}
+
+.countryFlag {
+  width: 25px;
+  height: 14px;
+}
+
+.countryRow {
+  display: flex;
+}
