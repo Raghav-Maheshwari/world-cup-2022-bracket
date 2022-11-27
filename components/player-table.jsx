@@ -62,7 +62,7 @@ export const PlayerTable = ({ players }) => {
     return (
       <TableRow key={player._id}>
         <TableCell>{player.name}</TableCell>
-        <TableCell>{aggregateScore}</TableCell>
+        <TableCell>{aggregateScore.toFixed(2)}</TableCell>
         <TableCell>
           <div className={styles.countryRow}>
             {countryPicks}
