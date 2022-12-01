@@ -16,7 +16,7 @@ export const CountryTable = ({ countries }) => {
     return (
       <TableRow key={country._id}>
         <TableCell>{country.name} <img className={styles.countryFlag} src={country.flag_url} /></TableCell>
-        <TableCell>{country.score}</TableCell>
+        <TableCell>{country.score.toFixed(2)}</TableCell>
       </TableRow>
     )
   })
