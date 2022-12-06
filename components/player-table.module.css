@@ -17,6 +17,7 @@
   text-decoration: none;
   margin: 4px 4px;
   border-radius: 16px;
+  cursor: pointer;
 }
 
 .countryName {
