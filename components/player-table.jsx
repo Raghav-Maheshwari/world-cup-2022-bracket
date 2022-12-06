@@ -7,6 +7,7 @@ import Table, {
   TableCell,
 } from "@kiwicom/orbit-components/lib/Table";
 import Heading from '@kiwicom/orbit-components/lib/Heading';
+import Tooltip from "@kiwicom/orbit-components/lib/Tooltip";
 
 export const PlayerTable = ({ players }) => {
   
@@ -27,16 +28,19 @@ export const PlayerTable = ({ players }) => {
   const isMobile = width <= 500;
 
   const CountryPick = ({ country }) => {
-    const { name, flag_url } = country;
+    const { name, flag_url, score } = country;
     
+    const tooltipContent = `points: ${score.toFixed(2)}`;
     
     return (
-      <div className={styles.countryContainer}>
-        {!isMobile && 
-          <span className={styles.countryName}>{name}</span>
-        }
-        <img className={styles.countryFlag} src={flag_url} /> 
-      </div>
+      <Tooltip content={tooltipContent} placement="bottom">
+        <div className={styles.countryContainer}>
+          {!isMobile && 
+            <span className={styles.countryName}>{name}</span>
+          }
+          <img className={styles.countryFlag} src={flag_url} /> 
+        </div>
+      </Tooltip>
     );
   }
   
