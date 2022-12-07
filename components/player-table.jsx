@@ -34,9 +34,9 @@ export const PlayerTable = ({ players }) => {
     
     return (
       <Tooltip content={tooltipContent} placement="bottom">
-        <div className={styles.countryContainer}>
+        <div className={`${styles.countryContainer} ${country.eliminated ? styles.eliminatedCountryContainer : ""}`}>
           {!isMobile && 
-            <span className={styles.countryName}>{name}</span>
+            <span className={`${styles.countryName} ${country.eliminated ? styles.eliminatedCountry : ""}`}>{name}</span>
           }
           <img className={styles.countryFlag} src={flag_url} /> 
         </div>

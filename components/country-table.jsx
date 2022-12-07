@@ -13,9 +13,10 @@ export const CountryTable = ({ countries }) => {
   })
   .splice(0, 10)
   .map(country => {
+    console.log(country);
     return (
       <TableRow key={country._id}>
-        <TableCell>{country.name} <img className={styles.countryFlag} src={country.flag_url} /></TableCell>
+        <TableCell><span className={`${country.eliminated ? styles.eliminatedCountry : ""}`}>{country.name}</span> <img className={styles.countryFlag} src={country.flag_url} /></TableCell>
         <TableCell>{country.score.toFixed(2)}</TableCell>
       </TableRow>
     )

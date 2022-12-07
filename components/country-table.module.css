@@ -7,3 +7,7 @@
   height: 14px;
   margin-left: 5px;
 }
+
+.eliminatedCountry {
+  text-decoration: line-through;
+}
